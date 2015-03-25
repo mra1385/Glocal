@@ -1,10 +1,8 @@
 from flask import Flask
 from . import config
-from flask_sqlalchemy import SQLAlchemy
 
 app = Flask("Glocal")
 app.config.from_object(config)
-db = SQLAlchemy(app)
 
 from Glocal import views
 

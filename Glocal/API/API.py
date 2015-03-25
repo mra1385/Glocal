@@ -3,19 +3,6 @@ from instagram.client import InstagramAPI
 import foursquare
 import tweepy
 
-Twitter_API_Key = 'XpP7VNPUUak2YMMjZkW0sKA15'
-Twitter_API_Secret = '2WOkIe7KkZ2B36bVcUsBEZA31LKQqHgCPWJJAF17G3E6ttZXrP'
-Twitter_Token = '776228798-XCOTz36pFolEUeygxt7Os19oY3GgQSaCH2TriwKM'
-Twitter_Token_Secret = 'jn43lDUZEDcoHSxmy20v2oR3EsoBdgXPwUlxni8OzOuUv'
-
-Google_API = 'AIzaSyDBpDaj4GWXn8ApFULeB0GkvYTLWROpxVA'
-
-Insta_Client_ID = "ed547816012648db9011d08fc0df709f"
-Insta_Client_Secret = "d7e8ffe769074807b630942796d8d0d7"
-
-FrSquare_Client_ID ="0CVJC4C44DABYTEWSG3DR54AIFAK53NZJ3KVZL1B0CBZXVSE"
-FrSquare_Client_Secret = "FTJZCTBXGVA4FGFULBSW11HZECTU3Z3SSYSDLCWED3IYAROT"
-
 class GlocalAPI:
     def __init__(self, st_address, city, state, miles='1'):
         self.st_address = st_address
@@ -114,12 +101,16 @@ class GlocalAPI:
         return places
 
 
-    def __str__(self):  # , st_num, st_name, st_type, city, state, miles):
-        """
-        String representation of class
-        """
-        return "Here are your parameters: {}, {}, {}, {}, {}, {}.".format(
-            self.st_address,
-            self.city,
-            self.state,
-            self.miles)
+##################################################
+Twitter_API_Key = 'XpP7VNPUUak2YMMjZkW0sKA15'
+Twitter_API_Secret = '2WOkIe7KkZ2B36bVcUsBEZA31LKQqHgCPWJJAF17G3E6ttZXrP'
+Twitter_Token = '776228798-XCOTz36pFolEUeygxt7Os19oY3GgQSaCH2TriwKM'
+Twitter_Token_Secret = 'jn43lDUZEDcoHSxmy20v2oR3EsoBdgXPwUlxni8OzOuUv'
+
+Google_API = 'AIzaSyDBpDaj4GWXn8ApFULeB0GkvYTLWROpxVA'
+
+Insta_Client_ID = "ed547816012648db9011d08fc0df709f"
+Insta_Client_Secret = "d7e8ffe769074807b630942796d8d0d7"
+
+FrSquare_Client_ID ="0CVJC4C44DABYTEWSG3DR54AIFAK53NZJ3KVZL1B0CBZXVSE"
+FrSquare_Client_Secret = "FTJZCTBXGVA4FGFULBSW11HZECTU3Z3SSYSDLCWED3IYAROT"

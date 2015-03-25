@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <!-- Map -->
+<section id="contact" class="map" align="center">
+    <iframe width="100%" height="50%" frameborder="0" scrolling="yes"
+            marginheight="0" marginwidth="0"
+            src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;
+            geocode=&amp;q={{st_address}}{{city}}{{state}}&amp;
+            aq=0&amp;oq=twitter&amp;sspn=0.128789,0.264187&amp;ie=UTF8
+            &amp;hq={{st_address}}{{city}}{{state}}&amp;t=m&amp;
+            z=15&amp;iwloc=A&amp;output=embed"></iframe>
+
+    <br />
+    <small>
+        <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;
+        geocode=&amp;q={{st_address}}{{city}}{{state}}&amp;aq=0
+        &amp;oq=twitter&amp;sspn=0.128789,0.264187
+        &amp;ie=UTF8&amp;hq={{st_address}}{{city}}{{state}}
+        &amp;t=m&amp;z=15&amp;iwloc=A"></a>
+    </small>
+</section>
+
+<section id="services" class="services bg-primary">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <h2>Which Social Media Should We Explore First?</h2>
+                    <hr class="small">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <img src="/static/img/Twitter.png" height="100%" width="100%">
+                            </span>
+                                <h4>
+                                    <strong>Twitter</strong>
+                                </h4>
+                                <p>What are folks tweeting?</p>
+                                <a href="#twitter" class="btn btn-light">Let's see!</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <img src="/static/img/instagram blue 2.png" height="100%" width="100%">
+                            </span>
+                                <h4>
+                                    <strong>Instagram</strong>
+                                </h4>
+                                <p>What pictures are people sharing?</p>
+                                <a href="#instagram" class="btn btn-light">Let's see!</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <img src="/static/img/foursquare.png" height="100%" width="100%">
+                            </span>
+                                <h4>
+                                    <strong>Four Square</strong>
+                                </h4>
+                                <p>Where are people checking in?</p>
+                                <a href="#four_square" class="btn btn-light">Let's see!</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+<div name="twitter" style="border:2px solid black" align="center"> <br>
+<h1> Check out what your neighbors are tweeting!</h1> <br>
+    <table align="center" border="1" rules="rows">
+    <tr>
+        <th class="th"> </th>
+        <th class="th">Screen Name</th>
+        <th class="th">Tweet</th>
+        <th class="th">Shared Link</th>
+    </tr>
+
+    {% for tweet in lst_local_tweets %}
+  <tr>
+      <td> <img src={{tweet.user.profile_image_url}}> </td>
+      <td> <strong> {{tweet.user.screen_name }}: </strong> </td>
+      <td> {{tweet.text }} </td>
+
+      {% if tweet.entities.urls|length > 0 %}
+      <td> <a href="http://{{tweet.entities.urls[0].display_url}}">
+          {{tweet.entities.urls[0].display_url}} </a></td>
+      {% else %}
+      <td> </td>
+      {% endif %}
+
+      {% endfor %}
+  </tr>
+</table>
+</div>
+
+<br>
+
+<div name="instagram" style="border:2px solid black" align="center"> <br>
+    <h1> Check out what your neighbors are posting to Instagram!</h1> <br>
+    <ul type="square">
+    {% for pic in lst_local_insta %}
+    <img src= {{pic}}>
+    {% endfor %}
+</ul>
+</div>
+
+
+<div name="four_square" style="border:2px solid black" align="center"> <br>
+<h1> Check out where your neighbors are checking in!</h1> <br>
+    <table align="center" border="1" rules="rows">
+    <tr>
+        <th class="th">Location</th>
+        <th>  </th>
+        <th class="th">Currently Checked-in</th>
+    </tr>
+
+    {% for key, value in lst_four_square.iteritems() %}
+  <tr>
+      <td>  {{ key }} </td>
+      <td style="padding:10px">  </td>
+      <td> {{value}} </td>
+      {% endfor %}
+  </tr>
+</table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <!-- Header -->
+    <header id="top" class="header">
+        <div class="text-vertical-center">
+            <h1>Welcome to Glocal</h1>
+            <br>
+            <a href="#about" class="btn btn-dark btn-lg">Let's Explore</a>
+        </div>
+    </header>
+
+    <!-- About -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Enter the address of the block that you'd like to explore!</h2>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+    <!-- Form -->
+    <section id="services" class="services bg-primary">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <h2>Block Address</h2>
+                    <hr class="small">
+                    <div class="row">
+                        <div class="col-lg-10 col-sm-6">
+                            <div class="service-item">
+                                <div class = "container">
+                                    <form class="form-horizontal" role="form" method="POST">
+                                    <div class="form-group">
+                                    <label class="control-label col-sm-2" for="st_address">Address:</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" name="st_address" id="st_address" placeholder="Enter address">
+                                    </div>
+                                </div>
+                                    <div class="form-group">
+                                    <label class="control-label col-sm-2" for="city">City:</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" name="city" id="city" placeholder="Enter city">
+                                    </div>
+                                </div>
+                                    <div class="form-group">
+                                    <label class="control-label col-sm-2" for="state">State or Country:</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" name="state" id="state" placeholder="Enter state or country">
+                                    </div>
+                                </div>
+                                    <div class="form-group">
+                                    <label class="control-label col-sm-2" for="miles">Radius (miles):</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" name="miles" id="miles" placeholder="Enter radius">
+                                    </div>
+                                </div>
+                                    <div class="form-group">
+                                    <div class="col-sm-9">
+                                        <button type="submit" class="btn btn-default">Submit</button>
+                                    </div>
+                                </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

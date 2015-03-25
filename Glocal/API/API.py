@@ -3,6 +3,19 @@ from instagram.client import InstagramAPI
 import foursquare
 import tweepy
 
+Twitter_API_Key = 'XpP7VNPUUak2YMMjZkW0sKA15'
+Twitter_API_Secret = '2WOkIe7KkZ2B36bVcUsBEZA31LKQqHgCPWJJAF17G3E6ttZXrP'
+Twitter_Token = '776228798-XCOTz36pFolEUeygxt7Os19oY3GgQSaCH2TriwKM'
+Twitter_Token_Secret = 'jn43lDUZEDcoHSxmy20v2oR3EsoBdgXPwUlxni8OzOuUv'
+
+Google_API = 'AIzaSyDBpDaj4GWXn8ApFULeB0GkvYTLWROpxVA'
+
+Insta_Client_ID = "ed547816012648db9011d08fc0df709f"
+Insta_Client_Secret = "d7e8ffe769074807b630942796d8d0d7"
+
+FrSquare_Client_ID ="0CVJC4C44DABYTEWSG3DR54AIFAK53NZJ3KVZL1B0CBZXVSE"
+FrSquare_Client_Secret = "FTJZCTBXGVA4FGFULBSW11HZECTU3Z3SSYSDLCWED3IYAROT"
+
 class GlocalAPI:
     def __init__(self, st_address, city, state, miles='1'):
         self.st_address = st_address
@@ -84,7 +97,7 @@ class GlocalAPI:
         return photos
 
 
-    def get_four_square(self):
+    def get_four_square_trending(self):
         # Construct the client object
         client = foursquare.Foursquare(client_id=FrSquare_Client_ID,
                                        client_secret=FrSquare_Client_Secret)
@@ -100,17 +113,23 @@ class GlocalAPI:
                 trending_venues["venues"][i]["hereNow"]["summary"]
         return places
 
-
-##################################################
-Twitter_API_Key = 'XpP7VNPUUak2YMMjZkW0sKA15'
-Twitter_API_Secret = '2WOkIe7KkZ2B36bVcUsBEZA31LKQqHgCPWJJAF17G3E6ttZXrP'
-Twitter_Token = '776228798-XCOTz36pFolEUeygxt7Os19oY3GgQSaCH2TriwKM'
-Twitter_Token_Secret = 'jn43lDUZEDcoHSxmy20v2oR3EsoBdgXPwUlxni8OzOuUv'
-
-Google_API = 'AIzaSyDBpDaj4GWXn8ApFULeB0GkvYTLWROpxVA'
-
-Insta_Client_ID = "ed547816012648db9011d08fc0df709f"
-Insta_Client_Secret = "d7e8ffe769074807b630942796d8d0d7"
-
-FrSquare_Client_ID ="0CVJC4C44DABYTEWSG3DR54AIFAK53NZJ3KVZL1B0CBZXVSE"
-FrSquare_Client_Secret = "FTJZCTBXGVA4FGFULBSW11HZECTU3Z3SSYSDLCWED3IYAROT"
+    def get_four_square_explore(self):
+        # Construct the client object
+        client = foursquare.Foursquare(client_id=FrSquare_Client_ID,
+                                       client_secret=FrSquare_Client_Secret)
+        # converts user's miles radius input into meters
+        dist_meters = str(float(self.miles) * 1603.34)
+        explore_venues = client.venues.explore(params=
+                                                 {'ll': str(self.latitude) + ','
+                                                        + str(self.longitude),
+                                                  'radius': dist_meters})
+        rating_hereNow = []
+        for i in range(len(explore_venues['groups'][0]['items'])):
+            lst_one = []
+            lst_one.append(explore_venues['groups'][0]['items'][i]['venue']['rating'])
+            lst_one.append(explore_venues['groups'][0]['items'][i]['venue']['hereNow']['summary'])
+            rating_hereNow.append(lst_one)
+        explore_places = dict()
+        for i in range(len(explore_venues['groups'][0]['items'])):
+            explore_places[explore_venues['groups'][0]['items'][i]['venue']['name']] = rating_hereNow[i]
+        return explore_places

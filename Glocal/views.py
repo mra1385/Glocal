@@ -27,7 +27,7 @@ def index_page():
         user_query = API.GlocalAPI(st_address, city, state, miles)
         lst_local_tweets = user_query.get_tweets()
         lst_local_insta = user_query.get_instagram()
-        lst_four_square = user_query.get_four_square_trending()
+        lst_four_square_trending = user_query.get_four_square_trending()
         lst_four_square_explore = user_query.get_four_square_explore()
         return render_template('results.html', title='Home',
                                page_dict=setup_page_dict(),

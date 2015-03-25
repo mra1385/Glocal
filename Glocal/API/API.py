@@ -125,11 +125,18 @@ class GlocalAPI:
                                                   'radius': dist_meters})
         rating_hereNow = []
         for i in range(len(explore_venues['groups'][0]['items'])):
-            lst_one = []
-            lst_one.append(explore_venues['groups'][0]['items'][i]['venue']['rating'])
-            lst_one.append(explore_venues['groups'][0]['items'][i]['venue']['hereNow']['summary'])
-            rating_hereNow.append(lst_one)
+            try:
+                lst_one = []
+                lst_one.append(explore_venues['groups'][0]['items'][i]['venue']['rating'])
+                lst_one.append(explore_venues['groups'][0]['items'][i]['venue']['hereNow']['summary'])
+                rating_hereNow.append(lst_one)
+            except:
+                continue
         explore_places = dict()
         for i in range(len(explore_venues['groups'][0]['items'])):
-            explore_places[explore_venues['groups'][0]['items'][i]['venue']['name']] = rating_hereNow[i]
+            try:
+                explore_places[explore_venues['groups'][0]['items'][i]['venue']['name']] = rating_hereNow[i]
+            except:
+                continue
         return explore_places
+

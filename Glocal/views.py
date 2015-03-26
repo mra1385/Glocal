@@ -26,6 +26,7 @@ def index_page():
         miles = request.form['miles']
         user_query = API.GlocalAPI(st_address, city, state, miles)
         lst_local_tweets = user_query.get_tweets()
+        lst_trending_topics = user_query.get_twitter_topics()
         lst_local_insta = user_query.get_instagram()
         lst_four_square_trending = user_query.get_four_square_trending()
         lst_four_square_explore = user_query.get_four_square_explore()
@@ -33,6 +34,7 @@ def index_page():
                                page_dict=setup_page_dict(),
                                app_name=app.config['APP_NAME'],
                                lst_local_tweets=lst_local_tweets,
+                               lst_trending_topics=lst_trending_topics,
                                lst_local_insta=lst_local_insta,
                                lst_four_square_trending=lst_four_square_trending,
                                lst_four_square_explore=lst_four_square_explore,

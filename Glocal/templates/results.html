@@ -75,14 +75,29 @@
         <!-- /.container -->
     </section>
 
-<div name="twitter" class="table table-striped table-responsive"> <br>
-    <h1 style="text-align:center"> Check out what your neighbors are tweeting!</h1> <br>
-    <table class="table table-striped table-responsive">
+<div name="twitter" class="table-condensed table-striped table-responsive" align="center"> <br>
+    <h1 style="text-align:center; background-color:#337ab7; color:white"> Twitter</h1> <br>
+    <table class="table-condensed table-responsive" style="white-space: nowrap" align="center">
+        <thread>
+            <tr>
+                <th class="th text-center">Trending Topics</th>
+            </tr>
+        </thread>
+        <tbody>
+        {% for topics in lst_trending_topics %}
+        <tr>
+            <td align="center"> {{ topics }} </td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <table class="table-condensed table-striped table-responsive">
         <thread>
             <tr>
                 <th class="th"> </th>
                 <th class="th">Screen Name</th>
-                <th class="th">Tweet</th>
+                <th class="th">Recent Tweet</th>
                 <th class="th">Shared Link</th>
             </tr>
         </thread>
@@ -107,7 +122,7 @@
 <br>
 
 <div name="instagram" style="border:2px solid black" align="center"> <br>
-    <h1> Check out what your neighbors are posting to Instagram!</h1> <br>
+    <h1 style="text-align:center; background-color:#337ab7; color:white">Instagram</h1> <br>
     <ul type="square">
     {% for pic in lst_local_insta %}
     <img src= {{pic}}>
@@ -116,9 +131,10 @@
 </div>
 
 
-<div name="four_square" class="table table-striped table-responsive"> <br>
-    <h1 style="text-align:center"> Check out where your neighbors are checking in!</h1> <br>
-    <table class="table">
+<div name="four_square" class="table table-striped table-responsive" align="center"> <br>
+    <h1 style="text-align:center; background-color:#337ab7; color:white"> Foursquare</h1> <br>
+    <table class="table-condensed table-striped table-responsive">
+        <h2 style="text-align:center"> These places are popular right now!</h2> <br>
         <thread>
             <tr>
                 <th class="th">Location</th>
@@ -137,8 +153,8 @@
         </tbody>
     </table>
 
-    <h1 style="text-align:center"> These places have also been popular recently!</h1> <br>
-    <table class="table">
+    <h2 style="text-align:center"> These places have also been popular recently!</h2> <br>
+    <table class="table-condensed table-striped table-responsive">
         <thread>
             <tr>
                 <th class="th">Location</th>

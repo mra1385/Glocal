@@ -71,6 +71,25 @@ class GlocalAPI:
             lst_local_tweets.append(tweet)
         return lst_local_tweets
 
+    def get_twitter_topics(self):
+        self.auth = tweepy.OAuthHandler(Twitter_API_Key, Twitter_API_Secret)
+        self.auth.set_access_token(Twitter_Token, Twitter_Token_Secret)
+        self.twitter_api = tweepy.API(self.auth)
+        trending_woeid = (self.twitter_api.trends_closest(self.latitude,self.longitude))
+        lst_trending_woeid = []
+        for i in range(len(trending_woeid)):
+            lst_trending_woeid.append(trending_woeid[i]['woeid'])
+
+        lst_trending_topics = []
+        for i in range(len(lst_trending_woeid)):
+            trending_topics = (self.twitter_api.trends_place(lst_trending_woeid[i]))
+            for i in range(len(trending_topics)):
+                trending_topics_2 = trending_topics[i]
+                for i in range(len(trending_topics_2)):
+                    lst_trending_topics.append(trending_topics_2['trends'][i]['name'])
+        return lst_trending_topics
+
+
     def get_instagram(self):
         """
         Queries latitude, longitude coordinates from Google Maps API using an

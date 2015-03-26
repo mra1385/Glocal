@@ -78,11 +78,7 @@
 <div name="twitter" class="table-condensed table-striped table-responsive" align="center"> <br>
     <h1 style="text-align:center; background-color:#337ab7; color:white"> Twitter</h1> <br>
     <table class="table-condensed table-responsive" style="white-space: nowrap" align="center">
-        <thread>
-            <tr>
-                <th class="th text-center">Trending Topics</th>
-            </tr>
-        </thread>
+        <h3> These topics are trending right now</h3>
         <tbody>
         {% for topics in lst_trending_topics %}
         <tr>
@@ -93,6 +89,7 @@
     </table>
     <br>
     <table class="table-condensed table-striped table-responsive">
+        <h3> Check out these recent tweets</h3>
         <thread>
             <tr>
                 <th class="th"> </th>
@@ -134,12 +131,12 @@
 <div name="four_square" class="table table-striped table-responsive" align="center"> <br>
     <h1 style="text-align:center; background-color:#337ab7; color:white"> Foursquare</h1> <br>
     <table class="table-condensed table-striped table-responsive">
-        <h2 style="text-align:center"> These places are popular right now!</h2> <br>
+        <h3> These places are popular right now</h2> <br>
         <thread>
             <tr>
                 <th class="th">Location</th>
                 <th>  </th>
-                <th class="th">Currently Checked-in</th>
+                <th class="th">Currently Here</th>
             </tr>
         </thread>
         <tbody>
@@ -153,20 +150,22 @@
         </tbody>
     </table>
 
-    <h2 style="text-align:center"> These places have also been popular recently!</h2> <br>
     <table class="table-condensed table-striped table-responsive">
+        <h3> These places have also been popular recently</h3> <br>
         <thread>
             <tr>
                 <th class="th">Location</th>
-                <th class="th">  Rating </th>
-                <th class="th">Currently Checked-in</th>
+                <th class="th" style="text-align:center">  Rating </th>
+                <th> </th>
+                <th class="th">Currently Here</th>
             </tr>
         </thread>
         <tbody>
         {% for key, value in lst_four_square_explore.iteritems() %}
         <tr>
             <td>  {{ key }} </td>
-            <td> {{value[0]}} </td>
+            <td style="text-align:center"> {{value[0]}} </td>
+            <td style="padding:10px">  </td>
             <td> {{value[1]}} </td>
             {% endfor %}
         </tr>

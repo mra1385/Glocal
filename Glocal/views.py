@@ -8,8 +8,6 @@ def setup_page_dict():
     the web page. Add the name and address of every new page here"""
     page_dict = collections.OrderedDict()
     page_dict['Home'] = '/'
-    page_dict['About'] = '/About'
-    page_dict['Contact'] = '/Contact'
     return page_dict
 
 @app.route('/', methods=['GET', 'POST'])

@@ -2131,9 +2131,8 @@ class Event(_BaseObject):
     def __repr__(self):
         return "%s, %s" % (repr(self.id), repr(self.network))
 
-    # @_string_output
-    # def __str__(self):
-    #     return str(self.get_id())
+    def __str__(self):
+        return self.get_id()
 
     def __eq__(self, other):
         if type(self) is type(other):

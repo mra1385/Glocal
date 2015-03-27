@@ -2,6 +2,8 @@ import requests
 from instagram.client import InstagramAPI
 import foursquare
 import tweepy
+import eventful
+import pylast
 
 Twitter_API_Key = 'XpP7VNPUUak2YMMjZkW0sKA15'
 Twitter_API_Secret = '2WOkIe7KkZ2B36bVcUsBEZA31LKQqHgCPWJJAF17G3E6ttZXrP'
@@ -15,6 +17,12 @@ Insta_Client_Secret = "d7e8ffe769074807b630942796d8d0d7"
 
 FrSquare_Client_ID ="0CVJC4C44DABYTEWSG3DR54AIFAK53NZJ3KVZL1B0CBZXVSE"
 FrSquare_Client_Secret = "FTJZCTBXGVA4FGFULBSW11HZECTU3Z3SSYSDLCWED3IYAROT"
+
+Eventful_Key = "g8PVTcPJbmnRdtdt"
+
+Last_fm_Key = 'a11eadd8a8429ad429e41385918f9fa1'
+Last_fm_Secret = '4ea3db3bb840ff0ef8e84021425068d1'
+
 
 class GlocalAPI:
     def __init__(self, st_address, city, state, miles='1'):
@@ -42,8 +50,10 @@ class GlocalAPI:
         self.latitude = data['results'][0]['geometry']['location']['lat']
         self.longitude = data['results'][0]['geometry']['location']['lng']
 
+
     def get_coordinates(self):
         return self.latitude, self.longitude
+
 
     def get_tweets(self):
         """
@@ -70,6 +80,7 @@ class GlocalAPI:
         for tweet in local_tweets:
             lst_local_tweets.append(tweet)
         return lst_local_tweets
+
 
     def get_twitter_topics(self):
         self.auth = tweepy.OAuthHandler(Twitter_API_Key, Twitter_API_Secret)
@@ -132,6 +143,7 @@ class GlocalAPI:
                 trending_venues["venues"][i]["hereNow"]["summary"]
         return places
 
+
     def get_four_square_explore(self):
         # Construct the client object
         client = foursquare.Foursquare(client_id=FrSquare_Client_ID,
@@ -158,4 +170,39 @@ class GlocalAPI:
             except:
                 continue
         return explore_places
+
+
+    def get_events(self):
+        api = eventful.API(Eventful_Key)
+        eventful_events = api.call('/events/search', location=(str(self.latitude) + ','
+                                                        + str(self.longitude)),
+                                   within=self.miles)
+
+        network = pylast.LastFMNetwork(api_key = Last_fm_Key,
+                                       api_secret = Last_fm_Secret)
+        lastfm_events = network.get_geo_events(longitude= self.longitude,
+                                               latitude = self.latitude,
+                                               distance=self.miles)
+
+        lst_events = []
+
+        for event in eventful_events['events']['event']:
+            tmp_event = []
+            tmp_event.append(event['title'])
+            tmp_event.append(event['venue_name'])
+            tmp_event.append(event['start_time'])
+            tmp_event.append(event['url'])
+            lst_events.append(tmp_event)
+
+        for i in range(len(lastfm_events)):
+            tmp_event = []
+            tmp_event.append(lastfm_events[i][1])
+            tmp_event.append(lastfm_events[i][2])
+            tmp_event.append(lastfm_events[i][3])
+            tmp_event.append(lastfm_events[i][4])
+            lst_events.append(tmp_event)
+
+        return lst_events
+
+# x = GlocalAPI("1500 Massachusetts AVe NW", "washington","dc","2" )
 

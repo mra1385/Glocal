@@ -30,6 +30,7 @@ def index_page():
         lst_local_insta = user_query.get_instagram()
         lst_four_square_trending = user_query.get_four_square_trending()
         lst_four_square_explore = user_query.get_four_square_explore()
+        lst_events = user_query.get_events()
         return render_template('results.html', title='Home',
                                page_dict=setup_page_dict(),
                                app_name=app.config['APP_NAME'],
@@ -38,6 +39,7 @@ def index_page():
                                lst_local_insta=lst_local_insta,
                                lst_four_square_trending=lst_four_square_trending,
                                lst_four_square_explore=lst_four_square_explore,
+                               lst_events = lst_events,
                                st_address = st_address,
                                city = city,
                                state = state)

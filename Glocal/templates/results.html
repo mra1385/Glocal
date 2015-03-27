@@ -29,6 +29,7 @@
                     <h2>Which Social Media Should We Explore First?</h2>
                     <hr class="small">
                     <div class="row">
+
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
@@ -41,6 +42,7 @@
                                 <a href="#twitter" class="btn btn-light">Let's see!</a>
                             </div>
                         </div>
+
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
@@ -53,6 +55,7 @@
                                 <a href="#instagram" class="btn btn-light">Let's see!</a>
                             </div>
                         </div>
+
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
@@ -64,6 +67,21 @@
                                 <p>Where are people checking in?</p>
                                 <a href="#four_square" class="btn btn-light">Let's see!</a>
                             </div>
+                        </div>
+
+                            <div class="col-md-3 col-sm-6">
+                                <div class="service-item">
+                                    <span class="fa-stack fa-4x">
+                                        <img src="/static/img/events3.png" height="100%" width="100%">
+                                    </span>
+                                    <h4>
+                                        <strong>Events</strong>
+                                    </h4>
+                                    <p>What local events are planned?</p>
+                                    <a href="#events" class="btn btn-light">Let's see!</a>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <!-- /.row (nested) -->
@@ -172,5 +190,34 @@
         </tbody>
     </table>
 </div>
+
+
+
+<div name="events" class="table-condensed table-striped table-responsive" align="center"> <br>
+    <h1 style="text-align:center; background-color:#337ab7; color:white"> Local Events</h1> <br>
+    <table class="table-condensed table-responsive table-striped" style="white-space: nowrap" align="center">
+        <h3> Check out these local events </h3>
+        <thread>
+            <tr>
+                <th class="th"> Event </th>
+                <th class="th"> Venue </th>
+                <th class="th"> Start Time </th>
+                <th class="th"> Event URL </th>
+            </tr>
+        </thread>
+        <tbody>
+        {% for event in lst_events %}
+        <tr>
+            <td> {{event[0]}} </td>
+            <td> {{event[1]}} </td>
+            <td> {{event[2]}}</td>
+            <td> <a href="{{event[3]}}">
+                {{event[3]}} </a></td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 
 {% endblock %}

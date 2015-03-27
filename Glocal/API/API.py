@@ -205,4 +205,3 @@ class GlocalAPI:
         return lst_events
 
 # x = GlocalAPI("1500 Massachusetts AVe NW", "washington","dc","2" )
-

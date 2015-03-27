@@ -200,17 +200,16 @@
                 <th class="th"> Event </th>
                 <th class="th"> Venue </th>
                 <th class="th"> Start Time </th>
-                <th class="th"> Event URL </th>
             </tr>
         </thread>
         <tbody>
         {% for event in lst_events %}
         <tr>
-            <td> {{event[0]}} </td>
+            <td> <a href="{{event[3]}}">
+                {{event[0]}} </a>
+            </td>
             <td> {{event[1]}} </td>
             <td> {{event[2]}}</td>
-            <td> <a href="{{event[3]}}">
-                {{event[3]}} </a></td>
             {% endfor %}
         </tr>
         </tbody>

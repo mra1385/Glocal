@@ -186,15 +186,12 @@ class GlocalAPI:
 
         lst_events = []
         for event in eventful_events['events']['event']:
-            try:
-                tmp_event = []
-                tmp_event.append(event['title'])
-                tmp_event.append(event['venue_name'])
-                tmp_event.append(event['start_time'])
-                tmp_event.append(event['url'])
-                lst_events.append(tmp_event)
-            except:
-                continue
+            tmp_event = []
+            tmp_event.append(event['title'])
+            tmp_event.append(event['venue_name'])
+            tmp_event.append(event['start_time'])
+            tmp_event.append(event['url'])
+            lst_events.append(tmp_event)
 
         for i in range(len(lastfm_events)):
             tmp_event = []

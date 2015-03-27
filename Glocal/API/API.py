@@ -185,14 +185,16 @@ class GlocalAPI:
                                                distance=self.miles)
 
         lst_events = []
-
         for event in eventful_events['events']['event']:
-            tmp_event = []
-            tmp_event.append(event['title'])
-            tmp_event.append(event['venue_name'])
-            tmp_event.append(event['start_time'])
-            tmp_event.append(event['url'])
-            lst_events.append(tmp_event)
+            try:
+                tmp_event = []
+                tmp_event.append(event['title'])
+                tmp_event.append(event['venue_name'])
+                tmp_event.append(event['start_time'])
+                tmp_event.append(event['url'])
+                lst_events.append(tmp_event)
+            except:
+                continue
 
         for i in range(len(lastfm_events)):
             tmp_event = []
@@ -205,3 +207,6 @@ class GlocalAPI:
         return lst_events
 
 # x = GlocalAPI("1500 Massachusetts AVe NW", "washington","dc","2" )
+# x.get_events()
+# y = GlocalAPI("","Sanaa","Yemen","10")
+# y.get_events()

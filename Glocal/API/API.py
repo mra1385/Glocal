@@ -185,24 +185,23 @@ class GlocalAPI:
                                                distance=self.miles)
 
         lst_events = []
+        if eventful_events['events'] != None:
+            if isinstance(eventful_events['events']['event'], list):
+                for event in eventful_events['events']['event']:
+                    tmp_event = []
+                    tmp_event.append(event['title'])
+                    tmp_event.append(event['venue_name'])
+                    tmp_event.append(event['start_time'])
+                    tmp_event.append(event['url'])
+                    lst_events.append(tmp_event)
 
-        print eventful_events['events']['event']
-        if isinstance(eventful_events['events']['event'], list):
-            for event in eventful_events['events']['event']:
+            elif isinstance(eventful_events['events']['event'], dict):
                 tmp_event = []
-                tmp_event.append(event['title'])
-                tmp_event.append(event['venue_name'])
-                tmp_event.append(event['start_time'])
-                tmp_event.append(event['url'])
+                tmp_event.append(eventful_events['events']['event']['title'])
+                tmp_event.append(eventful_events['events']['event']['venue_name'])
+                tmp_event.append(eventful_events['events']['event']['start_time'])
+                tmp_event.append(eventful_events['events']['event']['url'])
                 lst_events.append(tmp_event)
-
-        elif isinstance(eventful_events['events']['event'], dict):
-            tmp_event = []
-            tmp_event.append(eventful_events['events']['event']['title'])
-            tmp_event.append(eventful_events['events']['event']['venue_name'])
-            tmp_event.append(eventful_events['events']['event']['start_time'])
-            tmp_event.append(eventful_events['events']['event']['url'])
-            lst_events.append(tmp_event)
 
         for i in range(len(lastfm_events)):
             tmp_event = []
@@ -218,3 +217,5 @@ class GlocalAPI:
 # x.get_events()
 # y = GlocalAPI("","Sanaa","Yemen","10")
 # y.get_events()
+# z = GlocalAPI("42 mar elias street","al-mina, tripoli", "lebanon","5")
+# z.get_events()

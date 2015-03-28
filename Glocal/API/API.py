@@ -185,12 +185,23 @@ class GlocalAPI:
                                                distance=self.miles)
 
         lst_events = []
-        for event in eventful_events['events']['event']:
+
+        print eventful_events['events']['event']
+        if isinstance(eventful_events['events']['event'], list):
+            for event in eventful_events['events']['event']:
+                tmp_event = []
+                tmp_event.append(event['title'])
+                tmp_event.append(event['venue_name'])
+                tmp_event.append(event['start_time'])
+                tmp_event.append(event['url'])
+                lst_events.append(tmp_event)
+
+        elif isinstance(eventful_events['events']['event'], dict):
             tmp_event = []
-            tmp_event.append(event['title'])
-            tmp_event.append(event['venue_name'])
-            tmp_event.append(event['start_time'])
-            tmp_event.append(event['url'])
+            tmp_event.append(eventful_events['events']['event']['title'])
+            tmp_event.append(eventful_events['events']['event']['venue_name'])
+            tmp_event.append(eventful_events['events']['event']['start_time'])
+            tmp_event.append(eventful_events['events']['event']['url'])
             lst_events.append(tmp_event)
 
         for i in range(len(lastfm_events)):

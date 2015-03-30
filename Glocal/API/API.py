@@ -138,7 +138,9 @@ class GlocalAPI:
         trending_venues = client.venues.trending(params=
                                                  {'ll': str(self.latitude) + ','
                                                         + str(self.longitude),
-                                                  'radius': dist_meters})
+                                                  'radius': dist_meters,
+                                                  'sortByDistance':'1',
+                                                  'openNow':'1'})
         places = dict()
         for i in range(len(trending_venues["venues"])):
             places[trending_venues["venues"][i]["name"]] = \
@@ -155,7 +157,10 @@ class GlocalAPI:
         explore_venues = client.venues.explore(params=
                                                  {'ll': str(self.latitude) + ','
                                                         + str(self.longitude),
-                                                  'radius': dist_meters})
+                                                  'radius': dist_meters,
+                                                  'sortByDistance':'1',
+                                                  'openNow':'1',
+                                                  'limit':'20'})
         rating_hereNow = []
         for i in range(len(explore_venues['groups'][0]['items'])):
             try:
@@ -200,8 +205,8 @@ class GlocalAPI:
         for i in xrange(20):
             try:
                 tmp_event = []
-                tmp_event.append(eventbrite_events['events'][i]['name']['text'])
-                tmp_event.append(eventbrite_events['events'][i]['venue']['name'])
+                tmp_event.append(eventbrite_events['events'][i]['name']['text'][:35])
+                tmp_event.append(eventbrite_events['events'][i]['venue']['name'][:20])
                 tmp_event.append(eventbrite_events['events'][i]['start']['local'])
                 tmp_event.append(eventbrite_events['events'][i]['url'])
                 lst_events.append(tmp_event)
@@ -212,16 +217,16 @@ class GlocalAPI:
             if isinstance(eventful_events['events']['event'], list):
                 for event in eventful_events['events']['event']:
                     tmp_event = []
-                    tmp_event.append(event['title'])
-                    tmp_event.append(event['venue_name'])
+                    tmp_event.append(event['title'][:35])
+                    tmp_event.append(event['venue_name'][:20])
                     tmp_event.append(event['start_time'])
                     tmp_event.append(event['url'])
                     lst_events.append(tmp_event)
 
             elif isinstance(eventful_events['events']['event'], dict):
                 tmp_event = []
-                tmp_event.append(eventful_events['events']['event']['title'])
-                tmp_event.append(eventful_events['events']['event']['venue_name'])
+                tmp_event.append(eventful_events['events']['event']['title'][:35])
+                tmp_event.append(eventful_events['events']['event']['venue_name'][:20])
                 tmp_event.append(eventful_events['events']['event']['start_time'])
                 tmp_event.append(eventful_events['events']['event']['url'])
                 lst_events.append(tmp_event)

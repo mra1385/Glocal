@@ -4,6 +4,7 @@ import foursquare
 import tweepy
 import eventful
 import pylast.pylast
+from eventbrite import Eventbrite
 
 Twitter_API_Key = 'XpP7VNPUUak2YMMjZkW0sKA15'
 Twitter_API_Secret = '2WOkIe7KkZ2B36bVcUsBEZA31LKQqHgCPWJJAF17G3E6ttZXrP'
@@ -23,6 +24,7 @@ Eventful_Key = "g8PVTcPJbmnRdtdt"
 Last_fm_Key = 'a11eadd8a8429ad429e41385918f9fa1'
 Last_fm_Secret = '4ea3db3bb840ff0ef8e84021425068d1'
 
+Eventbrite_API = "HURARHPPK3AG2G5WJR3H"
 
 class GlocalAPI:
     def __init__(self, st_address, city, state, miles='1'):
@@ -174,9 +176,13 @@ class GlocalAPI:
 
     def get_events(self):
         api = eventful.API(Eventful_Key)
-        eventful_events = api.call('/events/search', location=(str(self.latitude) + ','
-                                                        + str(self.longitude)),
+
+        try:
+            eventful_events = api.call('/events/search', location=(str(self.latitude) + ','
+                                                               + str(self.longitude)),
                                    within=self.miles)
+        except:
+            eventful_events = dict({'events':None})
 
         network = pylast.pylast.LastFMNetwork(api_key = Last_fm_Key,
                                               api_secret = Last_fm_Secret)
@@ -184,7 +190,21 @@ class GlocalAPI:
                                                latitude = self.latitude,
                                                distance=self.miles)
 
+        eventbrite = Eventbrite(Eventbrite_API)
+        eventbrite_events = eventbrite.event_search(**{'location.within':self.miles + "mi",
+                                                       'location.latitude':str(self.latitude),
+                                                       'location.longitude':str(self.longitude),
+                                                       'popular':'true'})
+
         lst_events = []
+        for i in xrange(20):
+            tmp_event = []
+            tmp_event.append(eventbrite_events['events'][i]['name']['text'])
+            tmp_event.append(eventbrite_events['events'][i]['venue']['name'])
+            tmp_event.append(eventbrite_events['events'][i]['start']['local'])
+            tmp_event.append(eventbrite_events['events'][i]['url'])
+            lst_events.append(tmp_event)
+
         if eventful_events['events'] != None:
             if isinstance(eventful_events['events']['event'], list):
                 for event in eventful_events['events']['event']:
@@ -213,9 +233,10 @@ class GlocalAPI:
 
         return lst_events
 
-# x = GlocalAPI("1500 Massachusetts AVe NW", "washington","dc","2" )
+
+# x = GlocalAPI("1500 Massachusetts Ave NW", "washington","dc","1" )
 # x.get_events()
-# y = GlocalAPI("","Sanaa","Yemen","10")
+# # # y = GlocalAPI("","Sanaa","Yemen","10")
 # y.get_events()
 # z = GlocalAPI("42 mar elias street","al-mina, tripoli", "lebanon","5")
 # z.get_events()

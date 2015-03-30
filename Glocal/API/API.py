@@ -197,16 +197,16 @@ class GlocalAPI:
                                                        'popular':'true'})
 
         lst_events = []
-        try:
-            for i in xrange(20):
+        for i in xrange(20):
+            try:
                 tmp_event = []
                 tmp_event.append(eventbrite_events['events'][i]['name']['text'])
                 tmp_event.append(eventbrite_events['events'][i]['venue']['name'])
                 tmp_event.append(eventbrite_events['events'][i]['start']['local'])
                 tmp_event.append(eventbrite_events['events'][i]['url'])
                 lst_events.append(tmp_event)
-        except:
-            continue
+            except:
+                continue
 
         if eventful_events['events'] != None:
             if isinstance(eventful_events['events']['event'], list):

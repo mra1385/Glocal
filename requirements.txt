@@ -25,3 +25,4 @@ poster==0.8.1
 requests-oauthlib==0.4.2
 eventful==0.3
 argparse==1.3.0
+eventbrite==3.0.4

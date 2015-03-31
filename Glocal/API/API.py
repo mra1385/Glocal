@@ -185,7 +185,7 @@ class GlocalAPI:
         try:
             eventful_events = api.call('/events/search', location=(str(self.latitude) + ','
                                                                + str(self.longitude)),
-                                   within=self.miles)
+                                   within=self.miles, sort_order="date")
         except:
             eventful_events = dict({'events':None})
 
@@ -199,7 +199,8 @@ class GlocalAPI:
         eventbrite_events = eventbrite.event_search(**{'location.within':self.miles + "mi",
                                                        'location.latitude':str(self.latitude),
                                                        'location.longitude':str(self.longitude),
-                                                       'popular':'true'})
+                                                       'popular':'true',
+                                                       'sort_by':'date'})
 
         lst_events = []
         for i in xrange(20):
@@ -242,9 +243,9 @@ class GlocalAPI:
         return lst_events
 
 
-# x = GlocalAPI("1500 Massachusetts Ave NW", "washington","dc","1" )
-# x.get_events()
-# # # y = GlocalAPI("","Sanaa","Yemen","10")
-# y.get_events()
+x = GlocalAPI("1500 Massachusetts Ave NW", "washington","dc","1" )
+x.get_events()
+# # # # y = GlocalAPI("","Sanaa","Yemen","10")
+# # y.get_events()
 # z = GlocalAPI("42 mar elias street","al-mina, tripoli", "lebanon","5")
 # z.get_events()

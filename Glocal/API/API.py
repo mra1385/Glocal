@@ -196,7 +196,8 @@ class GlocalAPI:
                                                distance=self.miles)
 
         eventbrite = Eventbrite(Eventbrite_API)
-        eventbrite_events = eventbrite.event_search(**{'location.within':self.miles + "mi",
+        eventbrite_within = str(int(self.miles))
+        eventbrite_events = eventbrite.event_search(**{'location.within':eventbrite_within + "mi",
                                                        'location.latitude':str(self.latitude),
                                                        'location.longitude':str(self.longitude),
                                                        'popular':'true',
@@ -243,9 +244,9 @@ class GlocalAPI:
         return lst_events
 
 
-x = GlocalAPI("1500 Massachusetts Ave NW", "washington","dc","1" )
-x.get_events()
-# # # # y = GlocalAPI("","Sanaa","Yemen","10")
-# # y.get_events()
-# z = GlocalAPI("42 mar elias street","al-mina, tripoli", "lebanon","5")
+# x = GlocalAPI("1500 Massachusetts Ave NW", "washington","dc","1" )
+# x.get_events()
+# # # # # y = GlocalAPI("","Sanaa","Yemen","10")
+# # # y.get_events()
+# # z = GlocalAPI("42 mar elias street","al-mina, tripoli", "lebanon","5")
 # z.get_events()

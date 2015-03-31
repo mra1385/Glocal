@@ -196,7 +196,7 @@ class GlocalAPI:
                                                distance=self.miles)
 
         eventbrite = Eventbrite(Eventbrite_API)
-        eventbrite_within = str(int(self.miles))
+        eventbrite_within = str(int(float(self.miles)))
         eventbrite_events = eventbrite.event_search(**{'location.within':eventbrite_within + "mi",
                                                        'location.latitude':str(self.latitude),
                                                        'location.longitude':str(self.longitude),

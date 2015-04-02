@@ -181,6 +181,7 @@ class GlocalAPI:
 
 
     def get_events(self):
+        datetime_format = '%b %d,%Y -- %I:%M %p'
         api = eventful.API(Eventful_Key)
 
         try:
@@ -208,9 +209,12 @@ class GlocalAPI:
         for i in xrange(20):
             try:
                 tmp_event = []
+                tmp_time = []
                 tmp_event.append(eventbrite_events['events'][i]['name']['text'][:35])
                 tmp_event.append(eventbrite_events['events'][i]['venue']['name'][:20])
-                tmp_event.append(eventbrite_events['events'][i]['start']['local'])
+                tmp_time = eventbrite_events['events'][i]['start']['local']
+                tmp_time_adj = datetime.strptime(tmp_time,'%Y-%m-%dT%H:%M:%S').strftime(datetime_format)
+                tmp_event.append(tmp_time_adj)
                 tmp_event.append(eventbrite_events['events'][i]['url'])
                 lst_events.append(tmp_event)
             except:
@@ -220,25 +224,34 @@ class GlocalAPI:
             if isinstance(eventful_events['events']['event'], list):
                 for event in eventful_events['events']['event']:
                     tmp_event = []
+                    tmp_time = []
                     tmp_event.append(event['title'][:35])
                     tmp_event.append(event['venue_name'][:20])
-                    tmp_event.append(event['start_time'])
+                    tmp_time = event['start_time']
+                    tmp_time_adj = datetime.strptime(tmp_time,'%Y-%m-%d %H:%M:%S').strftime(datetime_format)
+                    tmp_event.append(tmp_time_adj)
                     tmp_event.append(event['url'])
                     lst_events.append(tmp_event)
 
             elif isinstance(eventful_events['events']['event'], dict):
                 tmp_event = []
+                tmp_time = []
                 tmp_event.append(eventful_events['events']['event']['title'][:35])
                 tmp_event.append(eventful_events['events']['event']['venue_name'][:20])
-                tmp_event.append(eventful_events['events']['event']['start_time'])
+                tmp_time = eventful_events['events']['event']['start_time']
+                tmp_time_adj = datetime.strptime(tmp_time,'%Y-%m-%d %H:%M:%S').strftime(datetime_format)
+                tmp_event.append(tmp_time_adj)
                 tmp_event.append(eventful_events['events']['event']['url'])
                 lst_events.append(tmp_event)
 
         for i in range(len(lastfm_events)):
             tmp_event = []
+            tmp_time = []
             tmp_event.append(lastfm_events[i].get_title())
             tmp_event.append(lastfm_events[i].get_venue().get_name())
-            tmp_event.append(lastfm_events[i].get_start_date())
+            tmp_time = lastfm_events[i].get_start_date()
+            tmp_time_adj = datetime.strptime(tmp_time,'%a, %d %b %Y %H:%M:%S').strftime(datetime_format)
+            tmp_event.append(tmp_time_adj)
             tmp_event.append(lastfm_events[i].get_url())
             lst_events.append(tmp_event)
 

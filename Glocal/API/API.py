@@ -193,9 +193,12 @@ class GlocalAPI:
 
         network = pylast.LastFMNetwork(api_key = Last_fm_Key,
                                        api_secret = Last_fm_Secret)
-        lastfm_events = network.get_geo_events(longitude= self.longitude,
+        try:
+            lastfm_events = network.get_geo_events(longitude= self.longitude,
                                                    latitude = self.latitude,
                                                    distance=self.miles)
+        except:
+            lastfm_events = []
 
         eventbrite = Eventbrite(Eventbrite_API)
         eventbrite_within = str(int(float(self.miles)))

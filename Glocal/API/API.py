@@ -5,6 +5,7 @@ import tweepy
 import eventful
 import pylast
 from eventbrite import Eventbrite
+from datetime import datetime
 
 Twitter_API_Key = 'XpP7VNPUUak2YMMjZkW0sKA15'
 Twitter_API_Secret = '2WOkIe7KkZ2B36bVcUsBEZA31LKQqHgCPWJJAF17G3E6ttZXrP'
@@ -240,7 +241,6 @@ class GlocalAPI:
             tmp_event.append(lastfm_events[i].get_start_date())
             tmp_event.append(lastfm_events[i].get_url())
             lst_events.append(tmp_event)
-            print tmp_event
 
         return lst_events
 

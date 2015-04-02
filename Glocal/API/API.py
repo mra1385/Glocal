@@ -3,7 +3,7 @@ from instagram.client import InstagramAPI
 import foursquare
 import tweepy
 import eventful
-import pylast.pylast
+import pylast
 from eventbrite import Eventbrite
 
 Twitter_API_Key = 'XpP7VNPUUak2YMMjZkW0sKA15'
@@ -189,11 +189,11 @@ class GlocalAPI:
         except:
             eventful_events = dict({'events':None})
 
-        network = pylast.pylast.LastFMNetwork(api_key = Last_fm_Key,
-                                              api_secret = Last_fm_Secret)
+        network = pylast.LastFMNetwork(api_key = Last_fm_Key,
+                                       api_secret = Last_fm_Secret)
         lastfm_events = network.get_geo_events(longitude= self.longitude,
-                                               latitude = self.latitude,
-                                               distance=self.miles)
+                                                   latitude = self.latitude,
+                                                   distance=self.miles)
 
         eventbrite = Eventbrite(Eventbrite_API)
         eventbrite_within = str(int(float(self.miles)))
@@ -235,11 +235,12 @@ class GlocalAPI:
 
         for i in range(len(lastfm_events)):
             tmp_event = []
-            tmp_event.append(lastfm_events[i][1])
-            tmp_event.append(lastfm_events[i][2])
-            tmp_event.append(lastfm_events[i][3])
-            tmp_event.append(lastfm_events[i][4])
+            tmp_event.append(lastfm_events[i].get_title())
+            tmp_event.append(lastfm_events[i].get_venue().get_name())
+            tmp_event.append(lastfm_events[i].get_start_date())
+            tmp_event.append(lastfm_events[i].get_url())
             lst_events.append(tmp_event)
+            print tmp_event
 
         return lst_events
 

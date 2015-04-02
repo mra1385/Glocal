@@ -245,15 +245,18 @@ class GlocalAPI:
                 lst_events.append(tmp_event)
 
         for i in range(len(lastfm_events)):
-            tmp_event = []
-            tmp_time = []
-            tmp_event.append(lastfm_events[i].get_title())
-            tmp_event.append(lastfm_events[i].get_venue().get_name())
-            tmp_time = lastfm_events[i].get_start_date()
-            tmp_time_adj = datetime.strptime(tmp_time,'%a, %d %b %Y %H:%M:%S').strftime(datetime_format)
-            tmp_event.append(tmp_time_adj)
-            tmp_event.append(lastfm_events[i].get_url())
-            lst_events.append(tmp_event)
+            try:
+                tmp_event = []
+                tmp_time = []
+                tmp_event.append(lastfm_events[i].get_title())
+                tmp_event.append(lastfm_events[i].get_venue().get_name())
+                tmp_time = lastfm_events[i].get_start_date()
+                tmp_time_adj = datetime.strptime(tmp_time,'%a, %d %b %Y %H:%M:%S').strftime(datetime_format)
+                tmp_event.append(tmp_time_adj)
+                tmp_event.append(lastfm_events[i].get_url())
+                lst_events.append(tmp_event)
+            except:
+                continue
 
         return sorted(lst_events, key=lambda x: datetime.strptime(x[-2], datetime_format))
 

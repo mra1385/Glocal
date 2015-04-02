@@ -255,7 +255,7 @@ class GlocalAPI:
             tmp_event.append(lastfm_events[i].get_url())
             lst_events.append(tmp_event)
 
-        return lst_events
+        return sorted(lst_events, key=lambda x: datetime.strptime(x[-2], datetime_format))
 
 
 # x = GlocalAPI("1500 Massachusetts Ave NW", "washington","dc","1" )

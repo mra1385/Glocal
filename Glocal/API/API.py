@@ -113,14 +113,13 @@ class GlocalAPI:
         # established link to Instagram using client ID and client secret
         instagram_api = InstagramAPI(client_id=Insta_Client_ID,
                                      client_secret=Insta_Client_Secret)
-        # converts user's miles radius input into km
-        dist_meters = str(float(self.miles) * 1.60934)
+        # converts user's miles radius input into meters
+        dist_meters = str(float(self.miles) * 1609.34)
         # queries instagram images using Instagram API with geographic param
         # latitude and longitude as floats, and radius as a string
-        local_media = instagram_api.media_search(count=20,
-                                                 lat=self.latitude,
+        local_media = instagram_api.media_search(lat=self.latitude,
                                                  lng=self.longitude,
-                                                 distance=dist_meters + "km")
+                                                 distance=dist_meters)
 
         # appends list of image links to 'photos' list. The image links are to
         # 'standard resolution' versions of images, not thumbnails.
@@ -263,8 +262,9 @@ class GlocalAPI:
 
         return sorted(lst_events, key=lambda x: datetime.strptime(x[-2], datetime_format))
 
-
+#
 # x = GlocalAPI("1500 Massachusetts Ave NW", "washington","dc","1" )
+# x.get_instagram()
 # x.get_events()
 # # # # # y = GlocalAPI("","Sanaa","Yemen","10")
 # # # y.get_events()

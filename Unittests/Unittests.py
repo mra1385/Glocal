@@ -25,6 +25,18 @@ class TestAPI(unittest.TestCase):
     def test2_get_instagram(self):
         self.assertTrue(len(self.user_query.get_instagram()) > 1)
 
+    def test_get_four_square(self):
+        self.assertIsNotNone(self.user_query.get_instagram())
+
+    def test2_get_four_square(self):
+        self.assertTrue(len(self.user_query.get_instagram()) > 1)
+
+    def test_get_events(self):
+        self.assertIsNotNone(self.user_query.get_instagram())
+
+    def test2_get_events(self):
+        self.assertTrue(len(self.user_query.get_instagram()) > 1)
+
 ## Add unittests for other GlocalAPI class methods ##
 
 if __name__ == '__main__':

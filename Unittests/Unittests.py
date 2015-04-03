@@ -14,10 +14,10 @@ class TestAPI(unittest.TestCase):
                          (38.9064936, -77.03541179999999))
 
     def test_get_tweets(self):
-        self.assertIsNotNone(self.user_query.get_tweets())
+        self.assertIsNotNone(self.user_query.get_twitter())
 
     def test2_local_tweets(self):
-        self.assertTrue(len(self.user_query.get_tweets()) > 1)
+        self.assertTrue(len(self.user_query.get_twitter()) > 1)
 
     def test_get_instagram(self):
         self.assertIsNotNone(self.user_query.get_instagram())

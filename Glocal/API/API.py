@@ -71,7 +71,6 @@ class GlocalAPI:
         self.auth.set_access_token(Twitter_Token, Twitter_Token_Secret)
         self.twitter_api = tweepy.API(self.auth)
 
-
         ###  -----  Local Tweets  -----   ###
 
         # Queries Twitter for tweets within a certain geographic location using
@@ -131,7 +130,6 @@ class GlocalAPI:
         # converts user's miles radius input into meters
         dist_meters = str(float(self.miles) * 1603.34)
 
-
         ###  -----  Trending Venues  -----   ###
 
         # Queries Four Square and returns trending venues within an area based on
@@ -190,7 +188,6 @@ class GlocalAPI:
 
         lst_events = []
 
-
         ###  -----  Eventful  -----   ###
 
         # Queries Eventful API and returns events within an area based on geo
@@ -232,7 +229,6 @@ class GlocalAPI:
                 tmp_event.append(tmp_time_adj)
                 tmp_event.append(eventful_events['events']['event']['url'])
                 lst_events.append(tmp_event)
-
 
         ###  -----  LastFM  -----   ###
 

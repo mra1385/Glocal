@@ -58,6 +58,11 @@ class GlocalAPI:
         self.latitude = data['results'][0]['geometry']['location']['lat']
         self.longitude = data['results'][0]['geometry']['location']['lng']
 
+
+    ###  -----  Return Latitude and Longitude  -----   ###
+    def get_coordinates(self):
+        return self.latitude, self.longitude
+
     ###  -----  Twitter API  -----   ###
     def get_twitter(self):
         # Queries Twitter and returns tweets and trending topics within an area

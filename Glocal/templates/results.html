@@ -2,6 +2,56 @@
 
 {% block content %}
 
+
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <li class="sidebar-brand">
+                <a href="#top"> Explore your world </a>
+            </li>
+            <li>
+                <a href="/"> Home </a>
+                <a href="#twitter"> Twitter </a>
+                <a href="#instagram"> Instagram </a>
+                <a href="#four_square"> Foursquare </a>
+                <a href="#events"> Events </a>
+
+            </li>
+        </ul>
+    </nav>
+    <script>
+        // Closes the sidebar menu
+        $("#menu-close").click(function(e) {
+            e.preventDefault();
+            $("#sidebar-wrapper").toggleClass("active");
+        });
+
+        // Opens the sidebar menu
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#sidebar-wrapper").toggleClass("active");
+        });
+
+        // Scrolls to the selected menu item on the page
+        $(function() {
+            $('a[href*=#]:not([href=#])').click(function() {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                    if (target.length) {
+                        $('html,body').animate({
+                            scrollTop: target.offset().top
+                        }, 1000);
+                        return false;
+                    }
+                }
+            });
+        });
+    </script>
+
     <!-- Map -->
 <section id="contact" class="map" align="center">
     <iframe width="100%" height="100%" frameborder="0" scrolling="yes"
@@ -62,7 +112,7 @@
                                 <img src="/static/img/foursquare.png" height="100%" width="100%">
                             </span>
                                 <h4>
-                                    <strong>Four Square</strong>
+                                    <strong>Foursquare</strong>
                                 </h4>
                                 <p>Where are people checking in?</p>
                                 <a href="#four_square" class="btn btn-light">Let's see!</a>
@@ -199,7 +249,7 @@
             <tr>
                 <th class="th"> Event </th>
                 <th class="th"> Venue </th>
-                <th class="th"> Start Date/Time </th>
+                <th class="th"> Start Date/Time <br> (past date means ongoing event)</th>
             </tr>
         </thread>
         <tbody>

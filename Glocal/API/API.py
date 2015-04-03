@@ -311,7 +311,7 @@ class GlocalAPI:
 
 
 # x = GlocalAPI("1500 Massachusetts Ave NW", "washington","dc","1" )
-# # # x.get_instagram()
+# # # # x.get_instagram()
 # x.get_events()
 # # # # # y = GlocalAPI("","Sanaa","Yemen","10")
 # # # y.get_events()

@@ -25,6 +25,7 @@ class TestAPI(unittest.TestCase):
     def test2_get_instagram(self):
         self.assertTrue(len(self.user_query.get_instagram()) > 1)
 
+## Add unittests for other GlocalAPI class methods ##
 
 if __name__ == '__main__':
     unittest.main()

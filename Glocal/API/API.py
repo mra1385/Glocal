@@ -303,7 +303,6 @@ class GlocalAPI:
                 tmp_event.append(tmp_time_adj)
                 tmp_event.append(eventbrite_events['events'][i]['url'])
                 lst_events.append(tmp_event)
-                print eventbrite_events['events'][i]['url']
             except:
                 continue
 

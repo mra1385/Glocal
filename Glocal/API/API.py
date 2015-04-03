@@ -311,9 +311,9 @@ class GlocalAPI:
         return sorted(lst_events, key=lambda x: datetime.strptime(x[-2], datetime_format))
 
 
-x = GlocalAPI("1500 Massachusetts Ave NW", "washington","dc","1" )
-# # x.get_instagram()
-x.get_events()
+# x = GlocalAPI("1500 Massachusetts Ave NW", "washington","dc","1" )
+# # # x.get_instagram()
+# x.get_events()
 # # # # # y = GlocalAPI("","Sanaa","Yemen","10")
 # # # y.get_events()
 # # z = GlocalAPI("42 mar elias street","al-mina, tripoli", "lebanon","5")

@@ -281,7 +281,7 @@ class GlocalAPI:
         eventbrite = Eventbrite(Eventbrite_API)
         # Eventbrite API requires radius ('within' param) to be integer
         # not less than 1.
-        eventbrite_within = max('1', str((self.miles)))
+        eventbrite_within = max('1', str(int(float(self.miles))))
         eventbrite_events = eventbrite.event_search(**{'location.within':eventbrite_within + "mi",
                                                        'location.latitude':str(self.latitude),
                                                        'location.longitude':str(self.longitude),
@@ -303,6 +303,7 @@ class GlocalAPI:
                 tmp_event.append(tmp_time_adj)
                 tmp_event.append(eventbrite_events['events'][i]['url'])
                 lst_events.append(tmp_event)
+                print eventbrite_events['events'][i]['url']
             except:
                 continue
 
@@ -310,9 +311,9 @@ class GlocalAPI:
         return sorted(lst_events, key=lambda x: datetime.strptime(x[-2], datetime_format))
 
 
-# x = GlocalAPI("1500 Massachusetts Ave NW", "washington","dc","0.01" )
+x = GlocalAPI("1500 Massachusetts Ave NW", "washington","dc","1" )
 # # x.get_instagram()
-# x.get_events()
+x.get_events()
 # # # # # y = GlocalAPI("","Sanaa","Yemen","10")
 # # # y.get_events()
 # # z = GlocalAPI("42 mar elias street","al-mina, tripoli", "lebanon","5")

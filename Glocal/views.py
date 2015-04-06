@@ -1,5 +1,5 @@
 from Glocal import app
-from flask import render_template, request
+from flask import render_template, request, render_template_string
 import collections
 from Glocal.API import API
 
@@ -22,11 +22,14 @@ def index_page():
         city = request.form['city']
         state = request.form['state']
         miles = request.form['miles']
-        user_query = API.GlocalAPI(st_address, city, state, miles)
+        latitude = request.form['latitude']
+        longitude = request.form['longitude']
+        user_query = API.GlocalAPI(st_address, city, state, miles, latitude, longitude)
         lst_local_tweets, lst_trending_tweets = user_query.get_twitter()
         lst_local_insta = user_query.get_instagram()
         lst_four_square_trending, lst_four_square_explore = user_query.get_four_square()
         lst_events = user_query.get_events()
+        actual_lat, actual_long = user_query.get_coordinates()
         return render_template('results.html', title='Home',
                                page_dict=setup_page_dict(),
                                app_name=app.config['APP_NAME'],
@@ -35,7 +38,11 @@ def index_page():
                                lst_local_insta=lst_local_insta,
                                lst_four_square_trending=lst_four_square_trending,
                                lst_four_square_explore=lst_four_square_explore,
-                               lst_events = lst_events,
-                               st_address = st_address,
-                               city = city,
-                               state = state)
+                               lst_events=lst_events,
+                               st_address=st_address,
+                               city=city,
+                               state=state,
+                               longitude=longitude,
+                               latitude=latitude,
+                               actual_lat = actual_lat,
+                               actual_long = actual_long)

@@ -55,6 +55,7 @@ class GlocalAPI:
         # Conditional that determines if user is using the 'Find My Location'
         # feature or has entered a specific address
 
+        assert False, (latitude, longitude)
         if len(latitude)> 2 and len(longitude) > 2:
             self.latitude = str(latitude)
             self.longitude = str(longitude)

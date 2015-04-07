@@ -39,7 +39,7 @@ class GlocalAPI:
     social media APIs.
     """
 
-    def __init__(self, st_address, city, state, miles, latitude=None, longitude=None):
+    def __init__(self, st_address, city, state, miles, latitude = None, longitude = None):
         """ Initializes GlocalAPI class instance by generating latitude, longitude
         data using Google Maps API
         """
@@ -52,11 +52,10 @@ class GlocalAPI:
         except ValueError:
             self.miles = '1'
 
-        assert False, (latitude, longitude)
         # Conditional that determines if user is using the 'Find My Location'
         # feature or has entered a specific address
 
-        if len(self.state)> 0:
+        if latitude is None or longitude is None:
             # Request of Google Maps API to convert address into latitude, longitude
             r = requests.get(
                 'https://maps.googleapis.com/maps/api/geocode/json?address=' +

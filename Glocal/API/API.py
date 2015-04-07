@@ -52,6 +52,7 @@ class GlocalAPI:
         except ValueError:
             self.miles = '1'
 
+        assert False, (latitude, longitude)
         # Conditional that determines if user is using the 'Find My Location'
         # feature or has entered a specific address
 

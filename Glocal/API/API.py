@@ -55,11 +55,7 @@ class GlocalAPI:
         # Conditional that determines if user is using the 'Find My Location'
         # feature or has entered a specific address
 
-        if len(latitude)> 2 and len(longitude) > 2:
-            self.latitude = str(latitude)
-            self.longitude = str(longitude)
-
-        else:
+        if len(self.state)> 0:
             # Request of Google Maps API to convert address into latitude, longitude
             r = requests.get(
                 'https://maps.googleapis.com/maps/api/geocode/json?address=' +
@@ -73,6 +69,10 @@ class GlocalAPI:
             # that includes information other than the coordinates.
             self.latitude = data['results'][0]['geometry']['location']['lat']
             self.longitude = data['results'][0]['geometry']['location']['lng']
+
+        else:
+            self.latitude = str(latitude)
+            self.longitude = str(longitude)
 
     ###  -----  Return Latitude and Longitude  -----   ###
     def get_coordinates(self):

@@ -22,8 +22,8 @@ def index_page():
         city = request.form['city']
         state = request.form['state']
         miles = request.form['miles']
-        latitude = request.form['latitude']
-        longitude = request.form['longitude']
+        # latitude = request.form['latitude']
+        # longitude = request.form['longitude']
         user_query = API.GlocalAPI(st_address, city, state, miles, latitude, longitude)
         lst_local_tweets, lst_trending_tweets = user_query.get_twitter()
         lst_local_insta = user_query.get_instagram()
@@ -42,7 +42,7 @@ def index_page():
                                st_address=st_address,
                                city=city,
                                state=state,
-                               longitude=longitude,
-                               latitude=latitude,
+                               # longitude=longitude,
+                               # latitude=latitude,
                                actual_lat = actual_lat,
                                actual_long = actual_long)

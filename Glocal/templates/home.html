@@ -64,9 +64,9 @@
                                         <div class="form-group">
                                             <div class="col-sm-9">
                                                 <button type="submit" class="btn btn-default"> Submit </button>
-                                                <button onclick="getLocation()" class="btn btn-default"> Find My Location </button>
-                                                <input type="hidden" name="latitude" id="latitude" />
-                                                <input type="hidden" name="longitude" id="longitude" />
+                                                <!--<button onclick="getLocation()" class="btn btn-default"> Find My Location </button>-->
+                                                <!--<input type="hidden" name="latitude" id="latitude" />-->
+                                                <!--<input type="hidden" name="longitude" id="longitude" />-->
                                             </div>
                                         </div>
                                     </form>
@@ -79,17 +79,17 @@
         </div>
     </section>
 
-<script>
-function getLocation() {
-    navigator.geolocation.getCurrentPosition(showPosition);
-}
+<!--<script>-->
+<!--function getLocation() {-->
+    <!--navigator.geolocation.getCurrentPosition(showPosition);-->
+<!--}-->
 
-function showPosition(position) {
-    document.getElementById('latitude').value = position.coords.latitude;
-    document.getElementById('longitude').value = position.coords.longitude;
-    document.getElementById('myForm').submit();
-}
-</script>
+<!--function showPosition(position) {-->
+    <!--document.getElementById('latitude').value = position.coords.latitude;-->
+    <!--document.getElementById('longitude').value = position.coords.longitude;-->
+    <!--document.getElementById('myForm').submit();-->
+<!--}-->
+<!--</script>-->
 
 
 {% endblock %}

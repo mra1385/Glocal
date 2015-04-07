@@ -24,7 +24,7 @@ def index_page():
         miles = request.form['miles']
         # latitude = request.form['latitude']
         # longitude = request.form['longitude']
-        user_query = API.GlocalAPI(st_address, city, state, miles, latitude, longitude)
+        user_query = API.GlocalAPI(st_address, city, state, miles)
         lst_local_tweets, lst_trending_tweets = user_query.get_twitter()
         lst_local_insta = user_query.get_instagram()
         lst_four_square_trending, lst_four_square_explore = user_query.get_four_square()

@@ -46,12 +46,16 @@ class GlocalAPI:
         self.st_address = st_address
         self.city = city
         self.state = state
-        self.miles = miles if miles > '0' else '1'
+        
+        try:
+            self.miles = miles if int(miles) > 0 else '1'
+        except ValueError:
+            self.miles = '1'
 
         # Conditional that determines if user is using the 'Find My Location'
         # feature or has entered a specific address
-        assert False, (latitude, longitude)
-        if latitude and longitude:
+
+        if latitude is not None and longitude is not None:
             self.latitude = str(latitude)
             self.longitude = str(longitude)
 

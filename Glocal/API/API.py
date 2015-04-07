@@ -55,25 +55,24 @@ class GlocalAPI:
         # Conditional that determines if user is using the 'Find My Location'
         # feature or has entered a specific address
 
-        # assert False, (latitude, longitude)
-        # if len(latitude)> 2 and len(longitude) > 2:
-        #     self.latitude = str(latitude)
-        #     self.longitude = str(longitude)
-        #
-        # else:
-        # Request of Google Maps API to convert address into latitude, longitude
-        r = requests.get(
-            'https://maps.googleapis.com/maps/api/geocode/json?address=' +
-            self.st_address + '+' + self.city + ',+' + self.state
-            + '&sensor=FALSE' + Google_API)
+        if len(latitude)> 2 and len(longitude) > 2:
+            self.latitude = str(latitude)
+            self.longitude = str(longitude)
 
-        # Converts the data into readable json format
-        data = r.json()
+        else:
+            # Request of Google Maps API to convert address into latitude, longitude
+            r = requests.get(
+                'https://maps.googleapis.com/maps/api/geocode/json?address=' +
+                self.st_address + '+' + self.city + ',+' + self.state
+                + '&sensor=FALSE' + Google_API)
 
-        # Pulls the latitude, longitude coordinates from a long stream of json data
-        # that includes information other than the coordinates.
-        self.latitude = data['results'][0]['geometry']['location']['lat']
-        self.longitude = data['results'][0]['geometry']['location']['lng']
+            # Converts the data into readable json format
+            data = r.json()
+
+            # Pulls the latitude, longitude coordinates from a long stream of json data
+            # that includes information other than the coordinates.
+            self.latitude = data['results'][0]['geometry']['location']['lat']
+            self.longitude = data['results'][0]['geometry']['location']['lng']
 
     ###  -----  Return Latitude and Longitude  -----   ###
     def get_coordinates(self):
@@ -209,7 +208,7 @@ class GlocalAPI:
         """
 
         # Datetime format for event start date/time
-        datetime_format = '%b %d,%Y -- %I:%M %p'
+        datetime_format = '%b %d, %Y -- %I:%M %p'
 
         lst_events = []
 

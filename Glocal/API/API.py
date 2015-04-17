@@ -48,14 +48,17 @@ class GlocalAPI:
         self.state = state
 
         try:
-            self.miles = miles if int(miles) > 0 else '1'
+            if float(miles) > 0:
+                self.miles = miles
+            else:
+                self.miles ='1'
         except ValueError:
             self.miles = '1'
 
         # Conditional that determines if user is using the 'Find My Location'
         # feature or has entered a specific address
 
-        if latitude is None or longitude is None:
+        try:
             # Request of Google Maps API to convert address into latitude, longitude
             # if latitude, longitude params are default values of 'None', which would
             # be the case if 'Find My Location' functionality is not used but
@@ -73,7 +76,7 @@ class GlocalAPI:
             self.latitude = data['results'][0]['geometry']['location']['lat']
             self.longitude = data['results'][0]['geometry']['location']['lng']
 
-        else:
+        except:
             # if latitude, longitude params are provided by 'Find My Location'
             # service, then street address is ignored these params are used
             # to query social media APIs.

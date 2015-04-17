@@ -57,6 +57,9 @@ class GlocalAPI:
 
         if latitude is None or longitude is None:
             # Request of Google Maps API to convert address into latitude, longitude
+            # if latitude, longitude params are default values of 'None', which would
+            # be the case if 'Find My Location' functionality is not used but
+            # a street address is used instead
             r = requests.get(
                 'https://maps.googleapis.com/maps/api/geocode/json?address=' +
                 self.st_address + '+' + self.city + ',+' + self.state
@@ -71,6 +74,9 @@ class GlocalAPI:
             self.longitude = data['results'][0]['geometry']['location']['lng']
 
         else:
+            # if latitude, longitude params are provided by 'Find My Location'
+            # service, then street address is ignored these params are used
+            # to query social media APIs.
             self.latitude = str(latitude)
             self.longitude = str(longitude)
 
